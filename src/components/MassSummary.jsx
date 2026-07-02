@@ -1,4 +1,5 @@
 import { AlertTriangle, CheckCircle } from 'lucide-react'
+import AircraftTiltIndicator from './AircraftTiltIndicator'
 
 function MassRow({ label, value, limit }) {
   const over = limit != null && value > limit
@@ -49,6 +50,8 @@ export default function MassSummary({ aircraft, result }) {
         }
       </div>
 
+      <AircraftTiltIndicator aircraft={aircraft} result={result} />
+
       <MassRow label="DOW (empty)"       value={aircraft.dow} />
       <MassRow label="Zero Fuel Mass"    value={zfm}  limit={aircraft.mzfw} />
       <MassRow label="Take-Off Mass"     value={tom}  limit={aircraft.mtow} />
@@ -57,13 +60,13 @@ export default function MassSummary({ aircraft, result }) {
       <div className="mt-4 pt-3 border-t border-slate-700 space-y-1">
         <p className="text-xs font-semibold uppercase tracking-wider text-slate-600 px-3 mb-2">CG Index</p>
         <IndexRow label="ZFM index" value={zfmIndex} color="text-sky-300" />
-        <IndexRow label="TOF index" value={tomIndex}  color="text-purple-300" />
+        <IndexRow label="TOF index" value={tomIndex}  color="text-amber-300" />
       </div>
 
       <div className="pt-3 border-t border-slate-700 space-y-1">
         <p className="text-xs font-semibold uppercase tracking-wider text-slate-600 px-3 mb-2">%MAC estimate</p>
         <IndexRow label="ZFM %MAC" value={indexToMAC(zfmIndex)} color="text-sky-300" />
-        <IndexRow label="TOF %MAC" value={indexToMAC(tomIndex)}  color="text-purple-300" />
+        <IndexRow label="TOF %MAC" value={indexToMAC(tomIndex)}  color="text-amber-300" />
       </div>
     </div>
   )

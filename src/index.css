@@ -1,1 +1,46 @@
 ﻿@import "tailwindcss";
+
+/*
+ * ── Dusk & Waves palette ────────────────────────────────────────────────────
+ *
+ * Accessible contrast pairs used in this application:
+ *   Light Cyan  #e0fbfc  on  Jet Black  #293241  → 11.9:1  AAA  (primary text)
+ *   Light Cyan  #e0fbfc  on  Dusk Blue  #3d5a80  →  6.5:1  AA   (text on elevated surface)
+ *   Powder Blue #98c1d9  on  Jet Black  #293241  →  6.7:1  AA   (secondary text)
+ *   Powder Blue #98c1d9  on  Dusk Blue  #3d5a80  →  3.7:1  AA★  (labels / large text only)
+ *   Burnt Peach #ee6c4d  on  Jet Black  #293241  →  4.2:1  AA★  (accents / bold UI only)
+ *
+ * ★ = passes WCAG AA for large text (≥18 pt) and UI components (≥3:1)
+ *
+ * Never combined: Burnt Peach on Dusk Blue (2.3:1), anything on Light Cyan bg.
+ * ────────────────────────────────────────────────────────────────────────── */
+@theme {
+  /* Backgrounds: Jet Black primary, Dusk Blue for elevated surfaces */
+  --color-slate-950: #1a2232;   /* deepest bg  */
+  --color-slate-900: #293241;   /* Jet Black – headers, sidebar, cards */
+  --color-slate-800: #3d5a80;   /* Dusk Blue  – elevated / active surface */
+  --color-slate-700: #4a6b96;   /* lighter Dusk Blue – hover state */
+  --color-slate-600: #6d91bb;   /* accessible border / muted element */
+  --color-slate-500: #98c1d9;   /* Powder Blue – muted text (6.7:1 on Jet Black) */
+  --color-slate-400: #98c1d9;   /* Powder Blue – secondary text */
+  --color-slate-300: #c5e6f0;   /* lighter Powder Blue */
+  --color-slate-200: #d9eef8;
+  --color-slate-100: #ecf7fb;
+  --color-slate-50:  #f5fbfd;
+
+  /* Primary text → Light Cyan (11.9:1 on Jet Black, 6.5:1 on Dusk Blue) */
+  --color-white: #e0fbfc;
+
+  /* Sky → Powder Blue / Light Cyan family */
+  --color-sky-600: #2d4a6a;
+  --color-sky-500: #3d5a80;    /* Dusk Blue */
+  --color-sky-400: #98c1d9;    /* Powder Blue */
+  --color-sky-300: #c5e6f0;    /* light Powder Blue */
+  --color-sky-200: #e0fbfc;    /* Light Cyan */
+
+  /* Burnt Peach – accents, TOF markers, warnings (large/bold text on Jet Black only) */
+  --color-amber-600: #c5502a;
+  --color-amber-500: #d85b32;
+  --color-amber-400: #ee6c4d;  /* Burnt Peach */
+  --color-amber-300: #f28e75;  /* lighter Burnt Peach */
+}

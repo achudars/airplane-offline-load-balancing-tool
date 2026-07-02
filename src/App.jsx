@@ -4,6 +4,7 @@ import AircraftSelector from './components/AircraftSelector'
 import AircraftDetails from './components/AircraftDetails'
 import LoadInputs from './components/LoadInputs'
 import TrimChart from './components/TrimChart'
+import CGChart from './components/CGChart'
 import MassSummary from './components/MassSummary'
 import { computeLoadsheet } from './data/aircraft'
 
@@ -28,6 +29,12 @@ export default function App() {
   const [aircraft, setAircraft] = useState(null)
   const [load, setLoad] = useState({})
   const [activeTab, setActiveTab] = useState('chart')
+
+  const TABS = [
+    { id: 'chart',   label: 'Trim Chart' },
+    { id: 'cg',      label: 'CG Envelope' },
+    { id: 'details', label: 'Aircraft Details' },
+  ]
 
   function handleSelectAircraft(ac) {
     setAircraft(ac)
@@ -72,17 +79,17 @@ export default function App() {
 
           <main className="flex-1 flex flex-col overflow-hidden">
             <div className="flex items-center gap-1 px-4 pt-3 border-b border-slate-800 shrink-0 bg-slate-950">
-              {['chart', 'details'].map(tab => (
+              {TABS.map(tab => (
                 <button
-                  key={tab}
-                  onClick={() => setActiveTab(tab)}
-                  className={`px-4 py-2 text-sm rounded-t-lg capitalize transition-colors ${
-                    activeTab === tab
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`px-4 py-2 text-sm rounded-t-lg transition-colors ${
+                    activeTab === tab.id
                       ? 'bg-slate-800 text-white border-t border-x border-slate-700'
                       : 'text-slate-500 hover:text-slate-300'
                   }`}
                 >
-                  {tab === 'chart' ? 'Trim Chart' : 'Aircraft Details'}
+                  {tab.label}
                 </button>
               ))}
             </div>
@@ -95,6 +102,22 @@ export default function App() {
                       Load &amp; Trim Envelope
                     </h2>
                     <TrimChart aircraft={aircraft} result={result} />
+                  </div>
+                  <div className="w-64 shrink-0 bg-slate-900 rounded-2xl border border-slate-800 p-5">
+                    <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-4">
+                      Mass Summary
+                    </h2>
+                    <MassSummary aircraft={aircraft} result={result} />
+                  </div>
+                </>
+              )}
+              {activeTab === 'cg' && (
+                <>
+                  <div className="flex-1 bg-slate-900 rounded-2xl border border-slate-800 p-5 min-w-0">
+                    <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-4">
+                      CG Envelope (%MAC vs Gross Mass)
+                    </h2>
+                    <CGChart aircraft={aircraft} result={result} />
                   </div>
                   <div className="w-64 shrink-0 bg-slate-900 rounded-2xl border border-slate-800 p-5">
                     <h2 className="text-sm font-semibold text-slate-400 uppercase tracking-widest mb-4">

@@ -33,6 +33,17 @@ const PointTooltip = ({ active, payload }) => {
   )
 }
 
+const DotShape = ({ cx, cy, payload }) => {
+  if (!payload) return null
+  const color = payload.ok ? '#22c55e' : '#ef4444'
+  return (
+    <g>
+        <circle cx={cx} cy={cy} r={9} fill={color} stroke="#1a2232" strokeWidth={2} />
+      <text x={cx + 13} y={cy + 4} fill={color} fontSize={11} fontWeight="bold">{payload.label}</text>
+    </g>
+  )
+}
+
 export default function TrimChart({ aircraft, result }) {
   if (!aircraft || !result) return null
 
@@ -64,17 +75,6 @@ export default function TrimChart({ aircraft, result }) {
     { x: tomIndex, y: tom, label: 'TOF', ok: tomOk },
   ]
 
-  const DotShape = ({ cx, cy, payload }) => {
-    if (!payload) return null
-    const color = payload.ok ? '#22c55e' : '#ef4444'
-    return (
-      <g>
-        <circle cx={cx} cy={cy} r={9} fill={color} stroke="#1e293b" strokeWidth={2} />
-        <text x={cx + 13} y={cy + 4} fill={color} fontSize={11} fontWeight="bold">{payload.label}</text>
-      </g>
-    )
-  }
-
   return (
     <div className="space-y-3">
       <div className={`flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold border ${
@@ -91,47 +91,47 @@ export default function TrimChart({ aircraft, result }) {
       <div style={{ height: 420 }}>
         <ResponsiveContainer width="100%" height="100%">
           <ComposedChart margin={{ top: 10, right: 80, bottom: 40, left: 20 }}>
-            <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+            <CartesianGrid strokeDasharray="3 3" stroke="#2d4a6a" />
 
             <XAxis
               dataKey="x" type="number"
               domain={[indexMin, indexMax]}
               tickCount={12}
-              tick={{ fill: '#475569', fontSize: 11 }}
-              label={{ value: 'Loaded Index', position: 'insideBottom', offset: -12, fill: '#64748b', fontSize: 12 }}
+              tick={{ fill: '#98c1d9', fontSize: 11 }}
+              label={{ value: 'Loaded Index', position: 'insideBottom', offset: -12, fill: '#c5e6f0', fontSize: 12 }}
             />
             <YAxis
               dataKey="y" type="number"
               domain={[massMin, massMax]}
               tickFormatter={v => `${Math.round(v / 1000)}t`}
-              tick={{ fill: '#475569', fontSize: 11 }}
+              tick={{ fill: '#98c1d9', fontSize: 11 }}
               width={45}
-              label={{ value: 'Gross Mass (kg)', angle: -90, position: 'insideLeft', offset: 15, fill: '#64748b', fontSize: 12 }}
+              label={{ value: 'Gross Mass (kg)', angle: -90, position: 'insideLeft', offset: 15, fill: '#c5e6f0', fontSize: 12 }}
             />
 
             <Tooltip content={<PointTooltip />} />
-            <Legend verticalAlign="top" wrapperStyle={{ fontSize: 11, color: '#64748b', paddingBottom: 8 }} />
+            <Legend verticalAlign="top" wrapperStyle={{ fontSize: 11, color: '#98c1d9', paddingBottom: 8 }} />
 
             {/* ZFW envelope polygon */}
             <Line
               data={envLine} dataKey="y" name="ZFW Envelope"
-              type="linear" stroke="#38bdf8" strokeWidth={2} dot={false} legendType="line"
+              type="linear" stroke="#82c0cc" strokeWidth={2} dot={false} legendType="line"
             />
 
             {/* MTOW envelope polygon */}
             <Line
               data={mtowLine} dataKey="y" name="TOF Envelope"
-              type="linear" stroke="#a855f7" strokeWidth={2} strokeDasharray="6 3"
+              type="linear" stroke="#ffa62b" strokeWidth={2} strokeDasharray="6 3"
               dot={false} legendType="line"
             />
 
             {/* Weight limit reference lines */}
-            <ReferenceLine y={aircraft.mzfw} stroke="#38bdf8" strokeDasharray="3 3" strokeWidth={1}
-              label={{ value: `MZFW`, fill: '#38bdf8', fontSize: 10, position: 'right' }} />
-            <ReferenceLine y={aircraft.mtow} stroke="#a855f7" strokeDasharray="3 3" strokeWidth={1}
-              label={{ value: `MTOW`, fill: '#a855f7', fontSize: 10, position: 'right' }} />
-            <ReferenceLine y={aircraft.mlm} stroke="#fb923c" strokeDasharray="3 3" strokeWidth={1}
-              label={{ value: `MLM`, fill: '#fb923c', fontSize: 10, position: 'right' }} />
+            <ReferenceLine y={aircraft.mzfw} stroke="#82c0cc" strokeDasharray="3 3" strokeWidth={1}
+              label={{ value: `MZFW`, fill: '#82c0cc', fontSize: 10, position: 'right' }} />
+            <ReferenceLine y={aircraft.mtow} stroke="#ffa62b" strokeDasharray="3 3" strokeWidth={1}
+              label={{ value: `MTOW`, fill: '#ffa62b', fontSize: 10, position: 'right' }} />
+            <ReferenceLine y={aircraft.mlm} stroke="#ffa62b" strokeDasharray="3 3" strokeWidth={1}
+              label={{ value: `MLM`, fill: '#ffa62b', fontSize: 10, position: 'right' }} />
 
             {/* Operating points */}
             <Scatter data={points} name="Operating Points" shape={DotShape} />
@@ -142,8 +142,8 @@ export default function TrimChart({ aircraft, result }) {
       <div className="flex flex-wrap gap-4 justify-center text-xs text-slate-500">
         <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-emerald-500 inline-block" /> ZFM/TOF within limits</span>
         <span className="flex items-center gap-1.5"><span className="w-3 h-3 rounded-full bg-red-500 inline-block" /> Out of limits</span>
-        <span className="flex items-center gap-1.5"><span className="inline-block w-5 border-t-2 border-sky-400" /> ZFW envelope</span>
-        <span className="flex items-center gap-1.5"><span className="inline-block w-5 border-t-2 border-dashed border-purple-400" /> TOF envelope</span>
+        <span className="flex items-center gap-1.5"><span className="inline-block w-5 border-t-2 border-sky-300" /> ZFW envelope</span>
+        <span className="flex items-center gap-1.5"><span className="inline-block w-5 border-t-2 border-dashed border-amber-400" /> TOF envelope</span>
       </div>
     </div>
   )

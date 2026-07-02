@@ -17,7 +17,7 @@ function SliderRow({ label, icon: Icon, value, min, max, step = 1, onChange, war
         <input
           type="range" min={min} max={max} step={step} value={value}
           onChange={e => onChange(Number(e.target.value))}
-          className="flex-1 h-1.5 rounded-full accent-sky-500 cursor-pointer"
+          className="flex-1 h-1.5 rounded-full accent-sky-400 cursor-pointer"
         />
         <span className="text-xs text-slate-600 w-7 text-right">{pct}%</span>
       </div>

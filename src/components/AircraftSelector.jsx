@@ -38,9 +38,9 @@ export default function AircraftSelector({ selected, onSelect }) {
   }
 
   const typeColors = {
-    'Narrowbody':   'bg-blue-900/60 text-blue-300',
-    'Widebody':     'bg-purple-900/60 text-purple-300',
-    'Regional jet': 'bg-green-900/60 text-green-300',
+    'Narrowbody':   'bg-slate-950 text-sky-400',
+    'Widebody':     'bg-slate-950 text-amber-400',
+    'Regional jet': 'bg-slate-950 text-emerald-400',
   }
 
   return (
