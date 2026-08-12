@@ -4,6 +4,28 @@ An offline-capable, browser-based Weight & Balance (W&B) tool for commercial air
 
 ---
 
+## Screenshots
+
+### Application Overview
+![Main application layout showing load inputs, trim chart, and mass summary](docs/screenshots/01-landing.png)
+
+### Aircraft Selector
+![Searchable aircraft selector grouped by manufacturer](docs/screenshots/02-aircraft-selector.png)
+
+### Live Trim Chart — Within Limits
+![Trim chart with ZFW and TOF envelopes and operating points within limits](docs/screenshots/03-trim-chart.png)
+
+### CG Envelope Detail
+![CG envelope polygons with ZFM and TOF operating points plotted](docs/screenshots/04-cg-envelope.png)
+
+### Aircraft Details Tab
+![Tabular view of certified aircraft parameters](docs/screenshots/05-aircraft-details.png)
+
+### Out-of-Limits — Tail-Heavy Configuration
+![OUT OF LIMITS banner with operating point outside the aft CG envelope boundary](docs/screenshots/06-tail-heavy.png)
+
+---
+
 ## Features
 
 ### Aircraft Selection
